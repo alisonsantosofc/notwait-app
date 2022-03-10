@@ -1,10 +1,13 @@
 import React from 'react';
 
+import GlobalStyle from './styles/global';
+
 function App() {
   return (
-    <div className="App">
+    <>
       <h1>Goomind</h1>
-    </div>
+      <GlobalStyle />
+    </>
   );
 }
 
