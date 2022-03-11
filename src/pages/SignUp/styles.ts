@@ -110,14 +110,16 @@ export const AnimationContainer = styled.div`
   .gear {
     position: absolute;
     top: 0;
-    right: 2rem;
+    left: 2rem;
     width: 35%;
-    animation: 15s linear 1s infinite reverse running gear-animation;
+    animation: 15s linear 1s infinite running gear-animation;
+    z-index: 1;
   }
 
   .brain {
     width: 70%;
-    margin-right: 8rem;
+    margin-left: 8rem;
+    transform: rotateY(180deg);
   }
 
   @keyframes gear-animation {
