@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { AiFillLock, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { BsBoxArrowLeft } from 'react-icons/bs';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import * as yup from 'yup';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import {
   Container,
@@ -19,9 +23,30 @@ import brainImg from '../../assets/brain-image.svg';
 import gearImg from '../../assets/gear-image.svg';
 
 function SignUp() {
-  function handleSubmit(data: object): void {
-    console.log(data);
-  }
+  const formRef = useRef<FormHandles>(null);
+
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = yup.object().shape({
+        name: yup.string().required('O nome é obrigatório'),
+        email: yup
+          .string()
+          .required('O e-mail é obrigatório')
+          .email('Digite um e-mail válido'),
+        password: yup.string().min(8, 'Digite no mínimo 8 caracteres'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      const errors = getValidationErrors(err as yup.ValidationError);
+
+      formRef.current?.setErrors(errors);
+    }
+  }, []);
 
   return (
     <Container>
@@ -39,7 +64,7 @@ function SignUp() {
           <p>Consultas psicológicas online</p>
         </BrandContainer>
 
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <h1>Cadastre-se</h1>
 
           <Input name="name" placeholder="Nome" icon={AiOutlineUser} />

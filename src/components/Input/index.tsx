@@ -54,6 +54,7 @@ function Input({ name, icon: Icon, ...restProps }: InputProps) {
         ref={inputRef}
         {...restProps}
       />
+      {error}
     </Container>
   );
 }
