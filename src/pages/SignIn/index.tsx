@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
+import * as yup from 'yup';
 import { AiOutlineUserAdd, AiFillLock, AiOutlineMail } from 'react-icons/ai';
 
 import Button from '../../components/Button';
@@ -12,11 +15,37 @@ import {
   BrandContainer,
 } from './styles';
 
+import getValidationErrors from '../../utils/getValidationErrors';
+
 import logoImg from '../../assets/logo-goomind.svg';
 import brainImg from '../../assets/brain-image.svg';
 import gearImg from '../../assets/gear-image.svg';
 
 function SignIn() {
+  const formRef = useRef<FormHandles>(null);
+
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = yup.object().shape({
+        email: yup
+          .string()
+          .required('O e-mail é obrigatório')
+          .email('O e-mail digitado está inválido'),
+        password: yup.string().required('A senha é obrigatória'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      const errors = getValidationErrors(err as yup.ValidationError);
+
+      formRef.current?.setErrors(errors);
+    }
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -26,7 +55,7 @@ function SignIn() {
           <p>Consultas psicológicas online</p>
         </BrandContainer>
 
-        <form>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <h1>Conecte-se</h1>
 
           <Input name="email" placeholder="E-mail" icon={AiOutlineMail} />
@@ -41,7 +70,7 @@ function SignIn() {
           <Button type="submit">Entrar</Button>
 
           <a href="/forgot">Esqueci minha senha</a>
-        </form>
+        </Form>
 
         <a href="/signup">
           <AiOutlineUserAdd />
