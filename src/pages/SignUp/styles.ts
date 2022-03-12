@@ -31,7 +31,7 @@ export const Content = styled.div`
     text-align: center;
 
     h1 {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: var(--white-100);
     }
 

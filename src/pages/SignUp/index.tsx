@@ -34,7 +34,7 @@ function SignUp() {
         email: yup
           .string()
           .required('O e-mail é obrigatório')
-          .email('Digite um e-mail válido'),
+          .email('O e-mail digitado está inválido'),
         password: yup.string().min(8, 'Digite no mínimo 8 caracteres'),
       });
 

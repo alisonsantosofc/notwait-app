@@ -6,7 +6,10 @@ import React, {
   useCallback,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
+import { IoAlertCircle } from 'react-icons/io5';
 import { useField } from '@unform/core';
+
+import Tooltip from '../Tooltip';
 
 import { Container } from './styles';
 
@@ -54,7 +57,11 @@ function Input({ name, icon: Icon, ...restProps }: InputProps) {
         ref={inputRef}
         {...restProps}
       />
-      {error}
+      {error && (
+        <Tooltip title={error}>
+          <IoAlertCircle />
+        </Tooltip>
+      )}
     </Container>
   );
 }

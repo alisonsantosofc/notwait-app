@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import Tooltip from '../Tooltip';
+
 interface ContainerProps {
   isFilled: boolean;
   isFocused: boolean;
@@ -40,7 +42,7 @@ export const Container = styled.div<ContainerProps>`
     `}
 
   svg {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
 
   input {
