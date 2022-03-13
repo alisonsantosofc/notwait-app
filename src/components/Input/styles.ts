@@ -41,12 +41,12 @@ export const Container = styled.div<ContainerProps>`
       color: #ff5733;
     `}
 
-  svg {
+  > svg {
     margin-right: 0.5rem;
   }
 
   input {
-    width: 90%;
+    width: 85%;
     background: transparent;
     border: 0;
     color: var(--white-100);

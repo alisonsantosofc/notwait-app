@@ -15,13 +15,14 @@ export const Container = styled.div`
     display: flex;
     color: #2fa3f0;
     font-size: 1.2rem;
+    margin-left: 0.5rem;
   }
 
   span {
     position: absolute;
     bottom: 1.5rem;
     left: 50%;
-    transform: translateX(-55%);
+    transform: translateX(-50%);
     width: 160px;
     background: var(--orange-500);
     padding: 0.5rem;
