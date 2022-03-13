@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useContext, useRef } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as yup from 'yup';
@@ -15,6 +15,8 @@ import {
   BrandContainer,
 } from './styles';
 
+import { AuthContext } from '../../context/AuthContext';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo-goomind.svg';
@@ -23,6 +25,10 @@ import gearImg from '../../assets/gear-image.svg';
 
 function SignIn() {
   const formRef = useRef<FormHandles>(null);
+
+  const auth = useContext(AuthContext);
+
+  console.log(auth);
 
   const handleSubmit = useCallback(async (data: object) => {
     try {
