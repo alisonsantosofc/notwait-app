@@ -33,7 +33,10 @@ function SignIn() {
           .string()
           .required('O e-mail é obrigatório')
           .email('O e-mail digitado está inválido'),
-        password: yup.string().required('A senha é obrigatória').min(8),
+        password: yup
+          .string()
+          .required('A senha é obrigatória')
+          .min(8, 'Digite no minímo 8 caracteres'),
       });
 
       await schema.validate(data, {
