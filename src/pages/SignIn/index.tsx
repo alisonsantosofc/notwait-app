@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 import { AiOutlineUserAdd, AiFillLock, AiOutlineMail } from 'react-icons/ai';
 
 import Button from '../../components/Button';
@@ -15,12 +15,14 @@ import {
   BrandContainer,
 } from './styles';
 
+import { useAuth } from '../../hooks/useAuth';
+import { useToast } from '../../hooks/useToast';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo-goomind.svg';
 import brainImg from '../../assets/brain-image.svg';
 import gearImg from '../../assets/gear-image.svg';
-import { useAuth } from '../../hooks/useAuth';
 
 interface SignInFormData {
   email: string;
@@ -31,35 +33,39 @@ function SignIn() {
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       try {
         formRef.current?.setErrors({});
 
-        const schema = yup.object().shape({
-          email: yup
-            .string()
+        const schema = Yup.object().shape({
+          email: Yup.string()
             .required('O e-mail é obrigatório')
             .email('O e-mail digitado está inválido'),
-          password: yup.string().required('A senha é obrigatória'),
+          password: Yup.string().required('A senha é obrigatória'),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        signIn({
+        await signIn({
           email: data.email,
           password: data.password,
         });
       } catch (err) {
-        const errors = getValidationErrors(err as yup.ValidationError);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err as Yup.ValidationError);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
+        }
+
+        addToast();
       }
     },
-    [signIn]
+    [signIn, addToast]
   );
 
   return (

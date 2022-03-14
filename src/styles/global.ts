@@ -12,6 +12,8 @@ export default createGlobalStyle`
     --bg-input: #0f2132;
 
     --boxshadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.15);
+
+    --boxshadow-bottom-right: 2px 2px 12px rgba(0, 0, 0, 0.2);
   }
 
   * {
@@ -25,7 +27,7 @@ export default createGlobalStyle`
 
   body {
     background: var(--bg-body);
-    color: #fff;
+    color: var(--white-100);
     -webkit-font-smoothing: antialiased;
   }
 

@@ -5,14 +5,14 @@ import SignIn from './pages/SignIn';
 
 import GlobalStyle from './styles/global';
 
-import { AuthProvider } from './contexts/AuthContext';
+import AppProvider from './contexts';
 
 function App() {
   return (
     <>
-      <AuthProvider>
+      <AppProvider>
         <SignIn />
-      </AuthProvider>
+      </AppProvider>
 
       <GlobalStyle />
     </>
