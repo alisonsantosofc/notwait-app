@@ -17,43 +17,55 @@ import {
 
 import { AuthContext } from '../../context/AuthContext';
 
+import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo-goomind.svg';
 import brainImg from '../../assets/brain-image.svg';
 import gearImg from '../../assets/gear-image.svg';
 
+interface SignInFormData {
+  email: string;
+  password: string;
+}
+
 function SignIn() {
   const formRef = useRef<FormHandles>(null);
 
-  const auth = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
-  console.log(auth);
+  const handleSubmit = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-  const handleSubmit = useCallback(async (data: object) => {
-    try {
-      formRef.current?.setErrors({});
+        const schema = yup.object().shape({
+          email: yup
+            .string()
+            .required('O e-mail é obrigatório')
+            .email('O e-mail digitado está inválido'),
+          password: yup
+            .string()
+            .required('A senha é obrigatória')
+            .min(8, 'Digite no minímo 8 caracteres'),
+        });
 
-      const schema = yup.object().shape({
-        email: yup
-          .string()
-          .required('O e-mail é obrigatório')
-          .email('O e-mail digitado está inválido'),
-        password: yup
-          .string()
-          .required('A senha é obrigatória')
-          .min(8, 'Digite no minímo 8 caracteres'),
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-    } catch (err) {
-      const errors = getValidationErrors(err as yup.ValidationError);
+        signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        const errors = getValidationErrors(err as yup.ValidationError);
 
-      formRef.current?.setErrors(errors);
-    }
-  }, []);
+        formRef.current?.setErrors(errors);
+      }
+    },
+    [signIn]
+  );
 
   return (
     <Container>
