@@ -17,7 +17,6 @@ import {
 
 import { AuthContext } from '../../context/AuthContext';
 
-import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo-goomind.svg';
@@ -32,7 +31,7 @@ interface SignInFormData {
 function SignIn() {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useContext(AuthContext);
+  const { user, signIn } = useContext(AuthContext);
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -44,10 +43,7 @@ function SignIn() {
             .string()
             .required('O e-mail é obrigatório')
             .email('O e-mail digitado está inválido'),
-          password: yup
-            .string()
-            .required('A senha é obrigatória')
-            .min(8, 'Digite no minímo 8 caracteres'),
+          password: yup.string().required('A senha é obrigatória'),
         });
 
         await schema.validate(data, {
