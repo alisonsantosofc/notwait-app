@@ -1,63 +1,36 @@
 import React from 'react';
 import { FiAlertCircle, FiX } from 'react-icons/fi';
+
+import { ToastMessage } from '../../contexts/ToastContext';
+
 import { Container, Toast } from './styles';
 
 interface ToastContainerProps {
-  toastType?: 'info' | 'success' | 'warning' | 'error';
+  messages: ToastMessage[];
+  // toastType?: 'info' | 'success' | 'warning' | 'error';
 }
 
-function ToastContainer({ toastType }: ToastContainerProps) {
+function ToastContainer({ messages }: ToastContainerProps) {
   return (
     <Container>
-      <Toast type="info" hasDescription>
-        <FiAlertCircle size={22} />
+      {messages.map(message => (
+        <Toast
+          key={message.id}
+          type={message.type}
+          hasDescription={!!message.description}
+        >
+          <FiAlertCircle size={26} />
 
-        <div>
-          <strong>Aconteceu um erro</strong>
-          <p>Não foi possível fazer o login</p>
-        </div>
+          <div>
+            <strong>{message.title}</strong>
+            {message.description && <p>{message.description}</p>}
+          </div>
 
-        <button type="button">
-          <FiX size={20} />
-        </button>
-      </Toast>
-
-      <Toast type="warning" hasDescription={false}>
-        <FiAlertCircle size={22} />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-        </div>
-
-        <button type="button">
-          <FiX size={20} />
-        </button>
-      </Toast>
-
-      <Toast type="success" hasDescription={false}>
-        <FiAlertCircle size={22} />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-        </div>
-
-        <button type="button">
-          <FiX size={20} />
-        </button>
-      </Toast>
-
-      <Toast type="error" hasDescription>
-        <FiAlertCircle size={22} />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-          <p>Não foi possível fazer o login</p>
-        </div>
-
-        <button type="button">
-          <FiX size={20} />
-        </button>
-      </Toast>
+          <button type="button">
+            <FiX size={20} />
+          </button>
+        </Toast>
+      ))}
     </Container>
   );
 }

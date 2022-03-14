@@ -47,7 +47,8 @@ export const Toast = styled.div`
   ${({ type }: ToastProps) => toastTypeVariations[type || 'default']}
 
   > svg {
-    margin: 0.8rem 1rem 0 0;
+    height: auto;
+    margin-right: 1rem;
   }
 
   div {

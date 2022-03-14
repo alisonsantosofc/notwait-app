@@ -62,7 +62,12 @@ function SignIn() {
           formRef.current?.setErrors(errors);
         }
 
-        addToast();
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description:
+            'Ocorreu um erro com a sua conexão, verifique as suas informações',
+        });
       }
     },
     [signIn, addToast]
