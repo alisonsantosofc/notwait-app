@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode, useCallback, useState } from 'react';
 
 import api from '../services/api';
 
@@ -12,9 +12,10 @@ interface SignInCredentials {
   password: string;
 }
 
-interface AuthContextData {
+export interface AuthContextData {
   user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 interface AuthProviderProps {
@@ -54,8 +55,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setData({ token, user });
   }, []);
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@Goomind:token');
+    localStorage.removeItem('@Goomind:user');
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

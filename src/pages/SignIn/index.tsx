@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as yup from 'yup';
@@ -15,13 +15,12 @@ import {
   BrandContainer,
 } from './styles';
 
-import { AuthContext } from '../../context/AuthContext';
-
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo-goomind.svg';
 import brainImg from '../../assets/brain-image.svg';
 import gearImg from '../../assets/gear-image.svg';
+import { useAuth } from '../../hooks/useAuth';
 
 interface SignInFormData {
   email: string;
@@ -31,7 +30,7 @@ interface SignInFormData {
 function SignIn() {
   const formRef = useRef<FormHandles>(null);
 
-  const { user, signIn } = useContext(AuthContext);
+  const { signIn } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
