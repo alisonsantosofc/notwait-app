@@ -43,4 +43,8 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .absolute {
+    position: absolute;
+  }
 `;

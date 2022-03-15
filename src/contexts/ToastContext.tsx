@@ -5,7 +5,7 @@ import ToastContainer from '../components/ToastContainer';
 
 export interface ToastContextData {
   addToast(message: Omit<ToastMessage, 'id'>): void;
-  removeToast(): void;
+  removeToast(id: string): void;
 }
 
 interface ToastProviderProps {
@@ -39,8 +39,11 @@ function ToastProvider({ children }: ToastProviderProps) {
     },
     [messages]
   );
-  const removeToast = useCallback(() => {
-    console.log('removeToast');
+
+  const removeToast = useCallback((id: string) => {
+    setMessages(oldMessages =>
+      oldMessages.filter(message => message.id !== id)
+    );
   }, []);
 
   return (
