@@ -1,16 +1,10 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
   height: 100vh;
   display: flex;
   align-items: stretch;
-`;
-
-export const BrandContainer = styled.div`
-  p {
-    text-align: end;
-  }
 `;
 
 export const Content = styled.div`
@@ -20,6 +14,31 @@ export const Content = styled.div`
   align-items: center;
   width: 100%;
   max-width: 600px;
+`;
+
+export const BrandContainer = styled.div`
+  p {
+    text-align: end;
+  }
+`;
+
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+export const AnimationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: ${appearFromRight} 1.2s;
 
   img {
     width: 350px;
@@ -99,7 +118,17 @@ export const SignInBackground = styled.div`
   }
 `;
 
-export const AnimationContainer = styled.div`
+const gearRotate = keyframes`
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const BackgroundAnimationContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -112,8 +141,8 @@ export const AnimationContainer = styled.div`
     top: 0;
     left: 2rem;
     width: 35%;
-    animation: 15s linear 1s infinite running gear-animation;
     z-index: 1;
+    animation: ${gearRotate} 18s linear 1s infinite;
   }
 
   .brain {

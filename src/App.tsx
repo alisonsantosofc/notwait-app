@@ -1,21 +1,20 @@
 import React from 'react';
-
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import GlobalStyle from './styles/global';
 
 import AppProvider from './contexts';
+import AppRoutes from './routes';
 
 function App() {
   return (
-    <>
+    <Router>
       <AppProvider>
-        <SignIn />
+        <AppRoutes />
       </AppProvider>
 
       <GlobalStyle />
-    </>
+    </Router>
   );
 }
 

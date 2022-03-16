@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -13,6 +14,7 @@ import {
   Content,
   SignInBackground,
   AnimationContainer,
+  BackgroundAnimationContainer,
   BrandContainer,
 } from './styles';
 
@@ -32,6 +34,11 @@ interface SignInFormData {
 
 function SignIn() {
   const formRef = useRef<FormHandles>(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location || '/dashboard';
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
@@ -56,11 +63,15 @@ function SignIn() {
           email: data.email,
           password: data.password,
         });
+
+        navigate(from, { replace: true });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err as Yup.ValidationError);
 
           formRef.current?.setErrors(errors);
+
+          return;
         }
 
         addToast({
@@ -71,46 +82,48 @@ function SignIn() {
         });
       }
     },
-    [signIn, addToast]
+    [signIn, addToast, from, navigate]
   );
 
   return (
     <Container>
       <Content>
-        <BrandContainer>
-          <img src={logoImg} alt="Goomind" />
+        <AnimationContainer>
+          <BrandContainer>
+            <img src={logoImg} alt="Goomind" />
 
-          <p>Consultas psicológicas online</p>
-        </BrandContainer>
+            <p>Consultas psicológicas online</p>
+          </BrandContainer>
 
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Conecte-se</h1>
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <h1>Conecte-se</h1>
 
-          <Input name="email" placeholder="E-mail" icon={FiMail} />
+            <Input name="email" placeholder="E-mail" icon={FiMail} />
 
-          <Input
-            name="password"
-            type="password"
-            placeholder="Senha"
-            icon={FiLock}
-          />
+            <Input
+              name="password"
+              type="password"
+              placeholder="Senha"
+              icon={FiLock}
+            />
 
-          <Button type="submit">Entrar</Button>
+            <Button type="submit">Entrar</Button>
 
-          <a href="/forgot">Esqueci minha senha</a>
-        </Form>
+            <a href="/forgot">Esqueci minha senha</a>
+          </Form>
 
-        <a href="/signup">
-          <AiOutlineUserAdd />
-          Criar uma conta
-        </a>
+          <Link to="/signup">
+            <AiOutlineUserAdd />
+            Criar uma conta
+          </Link>
+        </AnimationContainer>
       </Content>
 
       <SignInBackground>
-        <AnimationContainer>
+        <BackgroundAnimationContainer>
           <img src={gearImg} alt="Gear" className="gear" />
           <img src={brainImg} alt="Brain" className="brain" />
-        </AnimationContainer>
+        </BackgroundAnimationContainer>
       </SignInBackground>
     </Container>
   );

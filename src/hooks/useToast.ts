@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+
 import { ToastContext, ToastContextData } from '../contexts/ToastContext';
 
 export function useToast(): ToastContextData {

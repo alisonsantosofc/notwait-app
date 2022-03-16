@@ -31,6 +31,7 @@
     "import/no-duplicates": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-no-bind": "off",
+    "react/jsx-wrap-multilines": "off",
     "react/button-has-type": "off",
     "react/require-default-props": "off",
     "react-hooks/rules-of-hooks": "error",
