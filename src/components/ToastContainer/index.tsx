@@ -19,7 +19,7 @@ function ToastContainer({ messages }: ToastContainerProps) {
     enter: { right: '0%', opacity: 1 },
     leave: { right: '-120%', opacity: 0 },
     config: config.slow,
-    onDestroyed: () => setItems(messages),
+    onDestroyed: () => setItems([]),
   });
 
   useEffect(() => {

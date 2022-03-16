@@ -31,11 +31,8 @@ export const Container = styled(animated.div)`
   width: 360px;
   padding: 1rem 2rem 1rem 1rem;
   border-radius: 0.5rem;
+  margin: 0.5rem 0;
   box-shadow: var(--boxshadow-bottom-right);
-
-  & + div {
-    margin-top: 0.5rem;
-  }
 
   ${({ type }: ContainerProps) => toastTypeVariations[type || 'default']}
 
