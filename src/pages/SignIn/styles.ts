@@ -94,7 +94,7 @@ export const AnimationContainer = styled.div`
     }
 
     svg {
-      margin-right: 0.8rem;
+      margin-right: 0.5rem;
       font-size: 2rem;
       color: #ff5733;
     }

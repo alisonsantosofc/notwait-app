@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AiFillLock, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
-import { BsBoxArrowLeft } from 'react-icons/bs';
+import { FiLock, FiMail, FiUser } from 'react-icons/fi';
+import { IoArrowUndoOutline, IoPersonOutline } from 'react-icons/io5';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -82,7 +82,7 @@ function SignUp() {
         });
       }
     },
-    [addToast, navigate]
+    [addToast, navigate],
   );
 
   return (
@@ -105,20 +105,20 @@ function SignUp() {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Cadastre-se</h1>
 
-            <Input name="name" placeholder="Nome" icon={AiOutlineUser} />
-            <Input name="email" placeholder="E-mail" icon={AiOutlineMail} />
+            <Input name="name" placeholder="Nome" icon={FiUser} />
+            <Input name="email" placeholder="E-mail" icon={FiMail} />
             <Input
               name="password"
               type="password"
               placeholder="Senha"
-              icon={AiFillLock}
+              icon={FiLock}
             />
 
             <Button type="submit">Cadastrar</Button>
           </Form>
 
           <Link to="/">
-            <BsBoxArrowLeft />
+            <IoArrowUndoOutline />
             Voltar para conectar-se
           </Link>
         </AnimationContainer>
