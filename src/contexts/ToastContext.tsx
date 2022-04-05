@@ -37,12 +37,12 @@ function ToastProvider({ children }: ToastProviderProps) {
 
       setMessages(oldMessages => [...messages, toast]);
     },
-    [messages]
+    [messages],
   );
 
   const removeToast = useCallback((id: string) => {
     setMessages(oldMessages =>
-      oldMessages.filter(message => message.id !== id)
+      oldMessages.filter(message => message.id !== id),
     );
   }, []);
 

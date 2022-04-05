@@ -4,10 +4,10 @@ interface Errors {
   [key: string]: string;
 }
 
-function getValidationErrors(err: ValidationError): Errors {
+function getValidationErrors(errors: ValidationError): Errors {
   const validationErrors: Errors = {};
 
-  err.inner.forEach(error => {
+  errors.inner.forEach(error => {
     validationErrors[error.path] = error.message;
   });
 

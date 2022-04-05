@@ -82,7 +82,7 @@ function SignIn() {
         });
       }
     },
-    [signIn, addToast, from, navigate]
+    [signIn, addToast, from, navigate],
   );
 
   return (
