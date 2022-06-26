@@ -1,11 +1,11 @@
 <div align="center">
-  <img src="https://i.ibb.co/W36zqc2/demo-logo-goomind.png" width="400px" alt="demo">
+<!--   <img src="https://i.ibb.co/W36zqc2/demo-logo-goomind.png" width="400px" alt="demo">
   <br>
-  <img src="https://i.ibb.co/4WydYXv/Whats-App-Image-2022-03-15-at-11-14-50.jpg" width="700px" alt="demo">
+  <img src="https://i.ibb.co/4WydYXv/Whats-App-Image-2022-03-15-at-11-14-50.jpg" width="700px" alt="demo"> -->
 </div>
 <br>
 
-<h1 align="center">Goomind</h1>
+<h1 align="center">Beloo</h1>
 <p align="center">App for appointments and service providers</p>
 
 <p align="center"><a href="#">Click here to access the deploy</a></p>
@@ -37,10 +37,10 @@
 <div align="center" id="starting">
   <h1>Starting</h1>
   <p>1.Clone the repository with the following command.</p>
-  <p><b>git clone https://github.com/alisonsantosofc/goomind-app</b></p>
+  <p><b>git clone https://github.com/alisonsantosofc/beloo-app</b></p>
 
   <p>2.Navigate to the project folder with the following command.</p>
-  <p><b>cd goomind-app</b></p>
+  <p><b>cd beloo-app</b></p>
 
   <p>3.Run this command to install dependencies.</p>
   <p><b>yarn</b></p>
